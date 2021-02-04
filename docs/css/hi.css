@@ -3,3 +3,7 @@ p
     color: pink; 
 }
 
+#showme 
+{
+   visibility: visible;
+}
