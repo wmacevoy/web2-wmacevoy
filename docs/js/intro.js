@@ -1,22 +1,20 @@
 // alert('hello world')
 
-let showme = document.getElementById('showme')
-let countdown = document.getElementById('countdown')
+var showme = null;
+var countdown = null;
 var counter = 4
 
-showme.style.setProperty("visibility","hidden")
-
 function clickCheese() {
-    showme.style.setProperty("visibility","hidden")
+    $("#showme").css("visibility","hidden")
     counter = 4
     setTimeout(timeout,1000)
 }
 
-showme.onclick = clickCheese
 
 function timeout() {
     if (counter == 0) {
         showme.style.setProperty("visibility","visible")
+        $("#showme").css("visibility","visible")
     } else {
         counter = counter - 1
         countdown.innerText="" + counter + "..."
@@ -24,6 +22,13 @@ function timeout() {
     }
 }
 
-setTimeout(timeout,1000)
+function documentReady() {
+    showme = document.getElementById('showme')
+    countdown = document.getElementById('countdown')
+    showme.onclick = clickCheese
+    showme.style.setProperty("visibility","hidden")
+    setTimeout(timeout,1000)
+}
 
 
+$( document ).ready(documentReady);
