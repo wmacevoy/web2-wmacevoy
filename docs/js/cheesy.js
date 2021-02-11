@@ -1,41 +1,52 @@
-// alert('hello world')
 
-var showme = null;
-var countdown = null;
-var counter = 4
+class Cheezy {
+    config(div,id) {
+        this.div = div
+        this.id = id
+        this.timeout = parseInt(this.div.getAttribute("data-timeout"))
+        this.div.innerHTML = 
+           '<p id="' + this.id + 'countdown">' + this.id + '</p>' +
+           '<img id="' + this.id + 'showme" src="images/cheese-575540.svg" alt="cheese" >'
+        this.countdown = document.getElementById(this.id + 'countdown')
+        this.showme = document.getElementById(this.id + 'showme')
+        this.showme.style.setProperty("visibility","hidden")
+        const me = this;
+        this.showme.onclick = function() { me.clickShowme() }
 
-function clickCheese() {
-    $("#showme").css("visibility","hidden")
-    counter = 4
-    setTimeout(timeout,1000)
-}
+        this.counter = this.timeout
+        this.nextTime()
+        console.log('configured ' + this.id)
+    }
 
+    onTimeout(me) {
+        console.log('onTimeout for ' + this.id)
+        if (this.counter == 0) {
+            this.showme.style.setProperty("visibility","visible")
+        } else {
+            this.counter = this.counter - 1
+            this.countdown.innerText="" + this.counter + "..."
+            this.nextTime()
+        }
+    }
 
-function timeout() {
-    if (counter == 0) {
-        showme.style.setProperty("visibility","visible")
-        $("#showme").css("visibility","visible")
-    } else {
-        counter = counter - 1
-        countdown.innerText="" + counter + "..."
-        setTimeout(timeout,1000)
+    clickShowme() {
+        $("#" + this.id + "showme").css("visibility","hidden")
+        this.counter = this.timeout
+        this.nextTime()
+    }
+
+    nextTime() {
+        const me = this;
+        setTimeout(function() { me.onTimeout(); }, 1000)
     }
 }
 
 function documentReady() {
-    /*
-    showme = document.getElementById('showme')
-    countdown = document.getElementById('countdown')
-    showme.onclick = clickCheese
-    showme.style.setProperty("visibility","hidden")
-    setTimeout(timeout,1000)
-    */
-
     cheesyDivs = document.getElementsByClassName("cheesy")
-    for (var i=0; i<cheesyDivs.length; ++i) {
-        let cheesyDiv = cheesyDivs[i]
-        let timeout = parseInt(cheesyDiv.getAttribute("data-timeout"))
-        cheesyDivs[i].innerText = "found # " + i + " with timeout " + timeout
+    for (let i=0; i<cheesyDivs.length; ++i) {
+        const cheesyDiv = cheesyDivs[i]
+        const cheesyObj = new Cheezy()
+        cheesyObj.config(cheesyDiv,"cheesyId" + i)
     }
 }
 
