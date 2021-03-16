@@ -76,7 +76,7 @@ class Imager {
     add(i) {
 	const mapsNode=document.getElementById(this.mapsId());
 	const referenceNode = (i < this.maps.length) ? mapsNode.childNodes.item(i) : null;
-	this.maps.splice(i,0,[" ","#000000"]);
+	this.maps.splice(i,0,["","#000000"]);
 	mapsNode.insertBefore(this.createMap(i),referenceNode);
 	for (let j=i+1; j<this.maps.length; ++j) {
 	    mapsNode.replaceChild(this.createMap(j),mapsNode.childNodes.item(j));
