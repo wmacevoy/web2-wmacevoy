@@ -25,7 +25,7 @@ function timeout() {
 function documentReady() {
     showme = document.getElementById('showme')
     countdown = document.getElementById('countdown')
-    showme.onclick = clickCheese
+    showme.onclick = () =>clickCheese
     showme.style.setProperty("visibility","hidden")
     setTimeout(timeout,1000)
 }
