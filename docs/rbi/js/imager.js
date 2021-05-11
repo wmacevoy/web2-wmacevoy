@@ -1,6 +1,17 @@
-class Map {}
+// 'People' -> ['Person',...]
+// Person -> DOM,
+//        -> State (email, name, etc) 
 
-class Imager {
+# 'Maps' -> ['Map']
+
+
+class Map {
+	config(div,id) {
+		this.div=div
+		this.id=id
+
+	}
+
 	createMapAddBefore(i) {
 		const element = document.createElement('button');
 		element.innerText = '<+';
@@ -74,7 +85,6 @@ class Imager {
 		}
 		return element;
 	}
-
 	add(i) {
 		const mapsNode = document.getElementById(this.mapsId());
 		const referenceNode = (i < this.maps.length) ? mapsNode.childNodes.item(i) : null;
@@ -117,6 +127,13 @@ class Imager {
 		}
 		return element;
 	}
+
+
+	
+}
+
+class Imager {
+
 
 	mapsId() {
 		return this.id + '-maps';
